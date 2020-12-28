@@ -7,6 +7,8 @@ RUN useradd -ms /bin/bash user && \
     echo "user ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 USER user
 
+COPY ./docker/build.patch /home/user/
+
 # Build axoloti 
 RUN cd && \
     sudo apt-get update && \
@@ -17,6 +19,8 @@ RUN cd && \
     git clone http://github.com/axoloti/axoloti && \
     cd axoloti && \
     git checkout 1.0.12-2 && \
+    git apply ~/build.patch && \
+    git diff -U0 -C0 && \
     cd platform_linux && \
     ./build.sh && \
 # Clean up

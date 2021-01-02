@@ -15,7 +15,7 @@ RUN cd && \
     sudo apt-get install -qqy git \
         build-essential libtool libudev-dev  \
         automake autoconf ant curl p7zip-full unzip udev \
-        gcc-arm-linux-gnueabihf openjdk-7-jdk && \
+        make gcc-arm-linux-gnueabihf openjdk-7-jdk && \
     git clone http://github.com/axoloti/axoloti && \
     cd axoloti && \
     git checkout 1.0.12-2 && \
@@ -25,12 +25,10 @@ RUN cd && \
     ./build.sh && \
 # Clean up
     cd /home/user/axoloti && \
-    rm -rf platform_* .git && \
     sudo rm -rf /tmp/* /usr/share/doc/* /usr/share/info/* /var/tmp/* \
         /home/user/axoloti/axoloti-contrib/* && \
     sudo apt-get remove -qqy git build-essential libtool libudev-dev \
-        automake autoconf ant curl p7zip-full unzip udev \
-    	gcc-arm-linux-gnueabihf && \
+        automake autoconf ant curl p7zip-full unzip udev && \
     sudo apt-get autoremove -qqy && \
     sudo rm -rf /var/lib/apt/lists/*
 
